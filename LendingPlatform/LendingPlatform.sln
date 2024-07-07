@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LendingPlatform.App", "LendingPlatform.App\LendingPlatform.App.csproj", "{4D904B22-9F17-4344-BE10-812D4BE6D1B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LendingPlatform.Services", "LendingPlatform.Services\LendingPlatform.Services.csproj", "{FECE3A89-64EA-4892-A65D-F07641BB6A9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LendingPlatform.Services.Tests", "LendingPlatform.Services.Tests\LendingPlatform.Services.Tests.csproj", "{2BDC131C-0769-42A3-BA2B-375770572F29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{4D904B22-9F17-4344-BE10-812D4BE6D1B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D904B22-9F17-4344-BE10-812D4BE6D1B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D904B22-9F17-4344-BE10-812D4BE6D1B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FECE3A89-64EA-4892-A65D-F07641BB6A9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FECE3A89-64EA-4892-A65D-F07641BB6A9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FECE3A89-64EA-4892-A65D-F07641BB6A9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FECE3A89-64EA-4892-A65D-F07641BB6A9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BDC131C-0769-42A3-BA2B-375770572F29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BDC131C-0769-42A3-BA2B-375770572F29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BDC131C-0769-42A3-BA2B-375770572F29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BDC131C-0769-42A3-BA2B-375770572F29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
