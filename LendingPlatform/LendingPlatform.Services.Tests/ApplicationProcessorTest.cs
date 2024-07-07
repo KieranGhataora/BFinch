@@ -70,5 +70,33 @@ public class ApplicationProcessorTest
 
         Assert.Equal(success, result);
     }
+    
+    [Theory]
+    [InlineData(0.59, 750, true)]
+    [InlineData(0.59, 749, false)]
+    [InlineData(0.6, 750, false)]
+    [InlineData(0.79, 800, true)]
+    [InlineData(0.79, 799, false)]
+    [InlineData(0.80, 800, false)]
+    [InlineData(0.89, 900, true)]
+    [InlineData(0.89, 899, false)]
+    [InlineData(0.90, 800, false)]
+    public void ApplicationProcessor_ReturnsCorrectResult_IfLTVAndCreditScoreCriteriaAreNotMet_UnderOneMillion(
+        decimal ltv, int creditScore, bool success)
+    {
+        const decimal loanAmount = 999999;
 
+        var application = new Application
+        {
+            LoanValue = loanAmount,
+            AssetValue = loanAmount / ltv,
+            CreditScore = creditScore
+        };
+
+        var applicationProcessor = new ApplicationProcessor();
+
+        var result = applicationProcessor.Process(application);
+
+        Assert.Equal(success, result);
+    }
 }

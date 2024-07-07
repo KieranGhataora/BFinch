@@ -17,6 +17,15 @@ public class ApplicationProcessor
             if (ltv > MinLtvAboveOneMillion || application.CreditScore < MinCreditScoreAboveOneMillion)
                 return false;
 
+        if (application.LoanValue < 1000000)
+            return ltv switch
+            {
+                < 0.6m => application.CreditScore >= 750,
+                < 0.8m => application.CreditScore >= 800,
+                < 0.9m => application.CreditScore >= 900,
+                _ => false
+            };            
+        
         return true;
     }
 }
