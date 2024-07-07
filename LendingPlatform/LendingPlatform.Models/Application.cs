@@ -1,4 +1,4 @@
-﻿namespace LendingPlatform.Services;
+﻿namespace LendingPlatform.Models;
 
 public class Application
 {

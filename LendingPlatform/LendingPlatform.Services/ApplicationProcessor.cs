@@ -1,6 +1,9 @@
+using LendingPlatform.Models;
+using LendingPlatform.Repository;
+
 namespace LendingPlatform.Services;
 
-public class ApplicationProcessor
+public class ApplicationProcessor(IApplicationRepository applicationRepository)
 {
     private const decimal MaxLoan = 1500000m;
     private const decimal MinLoan = 100000m;
@@ -9,23 +12,35 @@ public class ApplicationProcessor
 
     public bool Process(Application application)
     {
-        if (application.LoanValue is > MaxLoan or < MinLoan) return false;
+        var applicationResult = true;
         
-        var ltv = application.LoanValue / application.AssetValue;
+        if (application.LoanValue is > MaxLoan or < MinLoan) applicationResult = false;
+        else
+        {
+            var ltv = application.LoanValue / application.AssetValue;
      
-        if (application.LoanValue >= 1000000)
-            if (ltv > MinLtvAboveOneMillion || application.CreditScore < MinCreditScoreAboveOneMillion)
-                return false;
-
-        if (application.LoanValue < 1000000)
-            return ltv switch
+            switch (application.LoanValue)
             {
-                < 0.6m => application.CreditScore >= 750,
-                < 0.8m => application.CreditScore >= 800,
-                < 0.9m => application.CreditScore >= 900,
-                _ => false
-            };            
+                case >= 1000000:
+                {
+                    if (ltv > MinLtvAboveOneMillion || application.CreditScore < MinCreditScoreAboveOneMillion)
+                        applicationResult = false;
+                    break;
+                }
+                case < 1000000:
+                    applicationResult = ltv switch
+                    {
+                        < 0.6m => application.CreditScore >= 750,
+                        < 0.8m => application.CreditScore >= 800,
+                        < 0.9m => application.CreditScore >= 900,
+                        _ => false
+                    };
+                    break;
+            }
+        }
         
-        return true;
+        applicationRepository.InsertApplication(application, applicationResult);
+        
+        return applicationResult;
     }
 }

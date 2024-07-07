@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\LendingPlatform.Models\LendingPlatform.Models.csproj" />
       <ProjectReference Include="..\LendingPlatform.Services\LendingPlatform.Services.csproj" />
     </ItemGroup>
 

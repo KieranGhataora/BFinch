@@ -1,9 +1,18 @@
+using LendingPlatform.Models;
+using LendingPlatform.Repository;
 using LendingPlatform.Services;
+using Moq;
 
 namespace LendingPlatform.Services.Tests;
 
 public class ApplicationProcessorTest
 {
+    private ApplicationProcessor GetApplicationProcessor()
+    {
+        return new ApplicationProcessor(
+            new Mock<IApplicationRepository>().Object);
+    }
+    
     [Theory]
     [InlineData(1500001, false)]
     [InlineData(1500000, true)]
@@ -14,7 +23,7 @@ public class ApplicationProcessorTest
     public void ApplicationProcessor_ReturnsCorrectResult_IfLoanAmountIsTooBigOrSmall(decimal loanAmount,
         bool success)
     {
-        var applicationProcessor = new ApplicationProcessor();
+        var applicationProcessor = GetApplicationProcessor();
 
         var applicationResult = applicationProcessor.Process(new Application
         {
@@ -41,7 +50,7 @@ public class ApplicationProcessorTest
             CreditScore = 950
         };
 
-        var applicationProcessor = new ApplicationProcessor();
+        var applicationProcessor = GetApplicationProcessor();
 
         var result = applicationProcessor.Process(application);
 
@@ -64,7 +73,7 @@ public class ApplicationProcessorTest
             CreditScore = creditScore
         };
 
-        var applicationProcessor = new ApplicationProcessor();
+        var applicationProcessor = GetApplicationProcessor();
 
         var result = applicationProcessor.Process(application);
 
@@ -93,7 +102,7 @@ public class ApplicationProcessorTest
             CreditScore = creditScore
         };
 
-        var applicationProcessor = new ApplicationProcessor();
+        var applicationProcessor = GetApplicationProcessor();
 
         var result = applicationProcessor.Process(application);
 
