@@ -31,6 +31,13 @@ public class ApplicationRepository: IApplicationRepository
 
     public IEnumerable<ApplicationResult> GetAllApplications()
     {
-        return JsonSerializer.Deserialize<IEnumerable<ApplicationResult>>(File.ReadAllText(_fileName))!;
+        try
+        {
+            return JsonSerializer.Deserialize<IEnumerable<ApplicationResult>>(File.ReadAllText(_fileName))!;
+        }
+        catch (Exception e)
+        {
+            return new List<ApplicationResult>();
+        }
     }
 }

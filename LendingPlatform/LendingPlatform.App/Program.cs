@@ -29,11 +29,7 @@ var applications = applicationRepository.GetAllApplications().ToArray();
 var successfulApplications = applications.Where(a => a.Success).ToArray();
 
 Console.WriteLine($"Application Result: {result}");
-Console.WriteLine($"Total Successful Applications {successfulApplications.Count()}");
-Console.WriteLine($"Total Failed Applications {applications.Count(a => !a.Success)}" );
-Console.WriteLine($"Total Loan Value Written To Date {successfulApplications.Sum(ar => ar.Application.LoanValue)}");
-Console.WriteLine($"Total Average Mean LTV Percentage: {successfulApplications.Average(ar => ar.Application.LoanValue / ar.Application.AssetValue)}");
-
-
-
-
+Console.WriteLine($"Total Successful Applications: {successfulApplications.Count()}");
+Console.WriteLine($"Total Failed Applications: {applications.Count(a => !a.Success)}" );
+Console.WriteLine($"Total Loan Value Written To Date: £{successfulApplications.Sum(ar => ar.Application.LoanValue)}");
+Console.WriteLine($"Total Average Mean LTV Percentage: {(successfulApplications.DefaultIfEmpty().Average(ar => ar?.Application.LoanValue / ar?.Application.AssetValue)*100 ?? 0)}%");
